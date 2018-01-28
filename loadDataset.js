@@ -27,10 +27,12 @@ d3.csv(url)
 		// d.Name = d.Name;
 		// d.Platform = d.Platform;
 		// d.Year_Of_Release += d.Year_Of_Release;
+		d.NA_Sales = +d.NA_Sales;
+
 
 		// return object
-		console.log(d)
-		// console.log(d.Critic_Count)
+		// console.log(d)
+		// console.log(d.NA_Sales);
 		return d;
 	})
 	.get(function(error, data){
