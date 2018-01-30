@@ -1,10 +1,11 @@
+//Data source: Canvas sample datasets
 var url = "http://www.sfu.ca/~wanteeny/iat355/asn2/data/Video_Games_Sales_as_at_22_Dec_2016.csv";
 
 
 d3.csv(url,function(data){
 
-//#1: Calculating min and max
-// referenced lab codes 9_d3_5
+  //#1: Calculating min and max
+  // referenced lab codes 9_d3_5
   var minNA= d3.min(data,function(d){  return +d['NA_Sales'];})
   var maxNA= d3.max(data,function(d){  return +d['NA_Sales'];})
   var minEU= d3.min(data,function(d){  return +d['EU_Sales'];})
@@ -46,51 +47,64 @@ d3.csv(url,function(data){
 
 
 
-//#3: Average Value
-getAverage(data,'Critic_Score');
+  //#3: Average Value
+  getGameAverage(data, 'NA_Sales', false);
+  getGameAverage(data, 'EU_Sales', false);
+  getGameAverage(data, 'JP_Sales', false);
+  getGameAverage(data, 'Other_Sales', false);
+  getGameAverage(data, 'Global_Sales', false);
+  getGameAverage(data,'Critic_Score', true);
+  getGameAverage(data, 'User_Score', true);
+  getGameAverage(data, 'User_Count', true);
 
-
-
-//#4: Count Dimension Criterion Matches
-countDimensionCriteria(data, 'Platform', "DS");
+  //#4: Count Dimension Criterion Matches
+  countGameDimensionCriteria(data, 'Platform', "DS");
 
 });
 
 
 //Get average of values for column
-function getAverage(data, itemVariable)
+function getGameAverage(data, itemVariable, filtered)
 {
-//filter items for value and return value as integer
-var valueArray = data.filter(function (d, i)
-{
-  // if (i < 5000) //<- constraint for how many data items to go through
-  // {
-    // console.log(+value)
-    return +d[itemVariable];
-  // }
-});
+  if (filtered == true)
+  {
+    //filter items and return value as integer
+    var valueArray = data.filter(function (d, i)
+    {
+      // if (i < 20) //<- constraint for how many data items to go through
+      // {
+        // console.log(+value)
+        // console.log(+d[itemVariable]);
+        return (+d[itemVariable]);
+      // }
+    });
+  }
+  else
+  {
+    var valueArray = data;
+  }
 
-//get average value
-var averageValue = d3.mean(valueArray, function(d) { return +d[itemVariable]});
+  //get average value
+  var averageValue = d3.mean(valueArray, function(d){return +d[itemVariable];});
 
-//print to console
-console.log("Average of "+ itemVariable +" = " + averageValue);
+  //print to console
+  console.log("Average of "+ itemVariable +" = " + averageValue);
 }
 
-function countDimensionCriteria(data, dimension, itemCriteria)
+function countGameDimensionCriteria(data, dimension, itemCriteria)
 {
-var itemCount = 0;
+  var itemCount = 0;
 
-data.forEach(function(d, i)
-{
-  // if (i < 5000) //<- constraint for how many data items to go through
-  // {
-    if (d[dimension].startsWith(itemCriteria))
-    {
-      itemCount++;
-    }
-  // }
-});
+  data.forEach(function(d, i)
+  {
+    // if (i < 5000) //<- constraint for how many data items to go through
+    // {
+      if (d[dimension].startsWith(itemCriteria))
+      {
+        itemCount++;
+      }
+    // }
+  });
 
-console.log("Number of " + itemCriteria + " games for " + dimension + " is: " + itemCount);
+  console.log("Number of " + itemCriteria + " games for " + dimension + " is: " + itemCount);
 }
