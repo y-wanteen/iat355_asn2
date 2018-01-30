@@ -5,29 +5,23 @@ var url = "http://www.sfu.ca/~wanteeny/iat355/asn2/data/Video_Games_Sales_as_at_
 d3.csv(url,function(data){
 
   //#1: Calculating min and max
-  // referenced lab codes 9_d3_5
-  var minNA= d3.min(data,function(d){  return +d['NA_Sales'];})
-  var maxNA= d3.max(data,function(d){  return +d['NA_Sales'];})
-  var minEU= d3.min(data,function(d){  return +d['EU_Sales'];})
-  var maxEU= d3.max(data,function(d){  return +d['EU_Sales'];})
-  var minJP= d3.min(data,function(d){  return +d['JP_Sales'];})
-  var maxJP= d3.max(data,function(d){  return +d['JP_Sales'];})
-  var minGlobal= d3.min(data,function(d){  return +d['Global_Sales'];})
-  var maxGlobal= d3.max(data,function(d){  return +d['Global_Sales'];})
-  var minCS= d3.min(data,function(d){  return +d['Critic_Score'];})
-  var maxCS= d3.max(data,function(d){  return +d['Critic_Score'];})
-  var minUS= d3.min(data,function(d){  return +d['User_Score'];})
-  var maxUS= d3.max(data,function(d){  return +d['User_Score'];})
-  var minCC= d3.min(data,function(d){  return +d['Critic_Count'];})
-  var maxCC= d3.max(data,function(d){  return +d['Critic_Count'];})
+  // referenced http://learnjsdata.com/summarize_data.html
+  var minNA= d3.extent(data,function(d){  return +d['NA_Sales'];})
+  var minEU= d3.extent(data,function(d){  return +d['EU_Sales'];})
+  var minJP= d3.extent(data,function(d){  return +d['JP_Sales'];})
+  var minGlobal= d3.extent(data,function(d){  return +d['Global_Sales'];})
+  var minCS= d3.extent(data,function(d){  return +d['Critic_Score'];})
+  var minUS= d3.extent(data,function(d){  return +d['User_Score'];})
+  var minCC= d3.extent(data,function(d){  return +d['Critic_Count'];})
 
-  console.log("Min NA sale is " +minNA+"\nMax NA sale is "+maxNA) ;
-  console.log("Min EU Sales= " +minEU +"\nMax EU Sales= " +maxEU) ;
-  console.log("Min JP Sales= " +minJP +"\nMax JP Sales= " +maxJP) ;
-  console.log( "Min Global Sales= " +minGlobal +"\nMax Global Sales= " +maxGlobal) ;
-  console.log("Min Critic Score= " +minCS +"\nMax Critic Score= " +maxCS) ;
-  console.log("Min User Score= " +minUS +"\nMax User Score= " +maxUS) ;;
-  console.log("Min Critic Count= " +minCC +"\nMax Critic Count= " +maxCC) ;
+  console.log("1)Finding Min and Max of 7  Video Games Dimensions: "+
+  "\n\nMin NA sale is " +minNA[0]+"         Max NA sale is "+minNA[1]+
+  "\nMin EU Sales= " +minEU[0] +"           Max EU Sales= " +minEU[1]+
+  "\nMin JP Sales= " +minJP[0] +"           Max JP Sales= " +minJP[1]+
+  "\nMin Global Sales= " +minGlobal[0] +"   Max Global Sales= " +minGlobal[1]+
+  "\nMin Critic Score= " +minCS[0] +"       Max Critic Score= " +minCS[1]+
+  "\nMin User Score= " +minUS[0] +"         Max User Score= " +minUS[1]+
+  "\nMin Critic Count= " +minCC[0] +"       Max Critic Count= " +minCC[1]) ;
 
 
 
@@ -41,9 +35,10 @@ d3.csv(url,function(data){
  var sumUS= d3.sum(data,function(d){return +d['User_Score'];})
  var sumCS= d3.sum(data,function(d){return +d['Critic_Score'];})
 
- console.log("Total NA sale " +sumNA+ "\nTotal EU sale " +sumEU+
-"\nTotal JP sale " +sumJP+"\nTotal user count " +sumUC+"\nTotal critic count " +sumCC+
-"\nTotal user score " +sumUS+"\nTotal critic score " +sumCS);
+ console.log("2) Total Sum of 7 Video Games Dimensions: "+
+"\n\nTotal NA sale= " +sumNA+ "\nTotal EU sale= " +sumEU+
+"\nTotal JP sale= " +sumJP+"\nTotal user count= " +sumUC+"\nTotal critic count " +sumCC+
+"\nTotal user score= " +sumUS+"\nTotal critic score= " +sumCS);
 
 
 
