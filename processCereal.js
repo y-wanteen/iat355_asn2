@@ -31,39 +31,57 @@ d3.csv(url, function(data)
 
 
 
-//#2: Calculating sum of a quantitative dimension
-// referenced https://github.com/d3/d3-array
- var sumShelf= d3.sum(data,function(d){return +d['shelf'];})
- var sumWeight= d3.sum(data,function(d){return +d['weight'];})
- var sumCups= d3.sum(data,function(d){return +d['cups'];})
- var sumVit= d3.sum(data,function(d){return +d['vitamins'];})
- var sumPotas= d3.sum(data,function(d){return +d['potass'];})
- var sumSug= d3.sum(data,function(d){return +d['sugars'];})
- var sumCarbs= d3.sum(data,function(d){return +d['carbo'];})
+	//#2: Calculating sum of a quantitative dimension
+	// referenced https://github.com/d3/d3-array
+	 var sumShelf= d3.sum(data,function(d){return +d['shelf'];})
+	 var sumWeight= d3.sum(data,function(d){return +d['weight'];})
+	 var sumCups= d3.sum(data,function(d){return +d['cups'];})
+	 var sumVit= d3.sum(data,function(d){return +d['vitamins'];})
+	 var sumPotas= d3.sum(data,function(d){return +d['potass'];})
+	 var sumSug= d3.sum(data,function(d){return +d['sugars'];})
+	 var sumCarbs= d3.sum(data,function(d){return +d['carbo'];})
 
- console.log("2) Total Sum of 7 Cereal Brands Dimensions: "+
-"\n\nTotal shelves= " +sumShelf+ "\nTotal weight= " +sumWeight+
-"\nTotal cups= " +sumCups+"\nTotal vitamins= " +sumVit+"\nTotal potassium= " + sumPotas+
-"\nTotal sugars= " +sumSug+"\nTotal carbs= " +sumCarbs);
+	 console.log("2) Total Sum of 7 Cereal Brands Dimensions: "+
+	"\n\nTotal shelves= " +sumShelf+ "\nTotal weight= " +sumWeight+
+	"\nTotal cups= " +sumCups+"\nTotal vitamins= " +sumVit+"\nTotal potassium= " + sumPotas+
+	"\nTotal sugars= " +sumSug+"\nTotal carbs= " +sumCarbs);
 
 
 	//#3: Average Value
-	getCerealAverage(data,'calories');
-	getCerealAverage(data,'protein');
-	getCerealAverage(data,'fat');
-	getCerealAverage(data,'sodium');
-	getCerealAverage(data,'fiber');
-	getCerealAverage(data,'carbo');
-	getCerealAverage(data,'sugars');
+	var avgCalories = getCerealAverage(data,'calories');
+	var avgProtein = getCerealAverage(data,'protein');
+	var avgFat = getCerealAverage(data,'fat');
+	var avgSodium = getCerealAverage(data,'sodium');
+	var avgFiber = getCerealAverage(data,'fiber');
+	var avgCarbo = getCerealAverage(data,'carbo');
+	var avgSugars = getCerealAverage(data,'sugars');
+
+	console.log("3) Average Values for 7 Cereal Dimensions: "+
+    "\n\nAverage Calories: "+ avgCalories +
+    "\nAverage Protein: "+avgProtein+
+    "\nAverage Fat: "+avgFat+
+    "\nAverage Sodium: "+avgSodium+
+    "\nAverage Fiber: "+avgFiber+
+    "\nAverage Carbohydrates: "+avgCarbo+
+    "\nAverage Sugars: "+avgSugars);
 
 	//#4: Count Dimension Criterion Matches
-	countCerealDimensionCriteria(data, 'name', "Cheerios");
-	countCerealDimensionCriteria(data, 'mfr', "K");
-	countCerealDimensionCriteria(data, 'Serve', "C");
-	countCerealDimensionCriteria(data, 'calories', "110");
-	countCerealDimensionCriteria(data, 'fat', "0");
-	countCerealDimensionCriteria(data, 'vitamins', "25");
-	countCerealDimensionCriteria(data, 'Type', "Regular");
+	var nameCount = countCerealDimensionCriteria(data, 'name', "Cheerios");
+	var mfrCount = countCerealDimensionCriteria(data, 'mfr', "K");
+	var serveCount = countCerealDimensionCriteria(data, 'Serve', "C");
+	var caloriesCount = countCerealDimensionCriteria(data, 'calories', "110");
+	var fatCount = countCerealDimensionCriteria(data, 'fat', "0");
+	var vitaminsCount = countCerealDimensionCriteria(data, 'vitamins', "25");
+	var typeCount = countCerealDimensionCriteria(data, 'Type', "Regular");
+
+	console.log("4) Count 7 Cereal Dimensions based on Criteria: "+
+    "\n\nNumber of cereals named 'Cheerios: "+nameCount+
+    "\nNumber of cereals manufactured by 'K': "+mfrCount+
+    "\nNumber of cereals with serving size 'C'': "+serveCount+
+    "\nNumber of cereals with '110' calories "+caloriesCount+
+    "\nNumber of cereals with '0' fat: "+fatCount+
+    "\nNumber of cereals with '25' vitamins: "+vitaminsCount+
+    "\nNumber of cereals of 'Regular' type: "+typeCount);
 
 });
 
@@ -74,8 +92,10 @@ function getCerealAverage(data, itemVariable)
 	//get average value
 	var averageValue = d3.mean(data, function(d){return +d[itemVariable]});
 
+	return averageValue;
+
 	//print to console
-	console.log("Average of "+ itemVariable +" = " + averageValue);
+	// console.log("Average of "+ itemVariable +" = " + averageValue);
 }
 
 function countCerealDimensionCriteria(data, dimension, itemCriteria)
@@ -93,5 +113,7 @@ function countCerealDimensionCriteria(data, dimension, itemCriteria)
 		// }
 	});
 
-	console.log("Number of " + itemCriteria + " cereal for " + dimension + " is: " + itemCount);
+	return itemCount;
+
+	// console.log("Number of " + itemCriteria + " cereal for " + dimension + " is: " + itemCount);
 }

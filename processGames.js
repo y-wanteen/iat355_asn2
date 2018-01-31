@@ -43,18 +43,40 @@ d3.csv(url,function(data){
 
 
   //#3: Average Value
-  getGameAverage(data, 'NA_Sales', false);
-  getGameAverage(data, 'EU_Sales', false);
-  getGameAverage(data, 'JP_Sales', false);
-  getGameAverage(data, 'Other_Sales', false);
-  getGameAverage(data, 'Global_Sales', false);
-  getGameAverage(data,'Critic_Score', true);
-  getGameAverage(data, 'User_Score', true);
-  getGameAverage(data, 'User_Count', true);
+  var avgNASales = getGameAverage(data, 'NA_Sales', false);
+  var avgEUSales = getGameAverage(data, 'EU_Sales', false);
+  var avgJPSales = getGameAverage(data, 'JP_Sales', false);
+  var avgOtherSales = getGameAverage(data, 'Other_Sales', false);
+  var avgGlobalSales = getGameAverage(data, 'Global_Sales', false);
+  var avgCriticScore = getGameAverage(data,'Critic_Score', true);
+  var avgUserScore = getGameAverage(data, 'User_Score', true);
+
+  console.log("3) Average Values for 7 Video Game Dimensions: "+
+    "\n\nAverage NA Sales: "+avgNASales+
+    "\nAverage EU Sales: "+avgEUSales+
+    "\nAverage JP Sales: "+avgJPSales+
+    "\nAverage Other Sales: "+avgOtherSales+
+    "\nAverage Global Sales: "+avgGlobalSales+
+    "\nAverage Critic Score: "+avgCriticScore+
+    "\nAverage User Score: "+avgUserScore);
 
   //#4: Count Dimension Criterion Matches
-  countGameDimensionCriteria(data, 'Platform', "DS");
+  var nameCount = countGameDimensionCriteria(data, 'Name', "Wii Sports");
+  var platformCount = countGameDimensionCriteria(data, 'Platform', "DS");
+  var releaseYearCount = countGameDimensionCriteria(data, 'Year_of_Release', "2006");
+  var genreCount = countGameDimensionCriteria(data, 'Genre', "Role-Playing");
+  var publisherCount = countGameDimensionCriteria(data, 'Publisher', "Nintendo");
+  var developerCount = countGameDimensionCriteria(data, 'Developer', "SquareSoft");
+  var ratingCount = countGameDimensionCriteria(data, 'Rating', "T");
 
+    console.log("4) Count 7 Video Game Dimensions based on Criteria: "+
+    "\n\nNumber of games named 'Wii Sports': "+nameCount+
+    "\nNumber of games for the 'DS' platform: "+platformCount+
+    "\nNumber of games released in '2006': "+releaseYearCount+
+    "\nNumber of games from the 'Role-Playing' genre: "+genreCount+
+    "\nNumber of games published by 'Nintendo': "+publisherCount+
+    "\nNumber of games developed by 'SquareSoft': "+developerCount+
+    "\nNumber of games rated 'T': "+ratingCount);
 });
 
 
@@ -82,8 +104,10 @@ function getGameAverage(data, itemVariable, filtered)
   //get average value
   var averageValue = d3.mean(valueArray, function(d){return +d[itemVariable];});
 
+  return averageValue;
+
   //print to console
-  console.log("Average of "+ itemVariable +" = " + averageValue);
+  // console.log("Average of "+ itemVariable +" = " + averageValue);
 }
 
 function countGameDimensionCriteria(data, dimension, itemCriteria)
@@ -101,5 +125,6 @@ function countGameDimensionCriteria(data, dimension, itemCriteria)
     // }
   });
 
-  console.log("Number of " + itemCriteria + " games for " + dimension + " is: " + itemCount);
+  return itemCount;
+  // console.log("Number of " + itemCriteria + " games for " + dimension + " is: " + itemCount);
 }
