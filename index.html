@@ -25,13 +25,13 @@
 
 		<div class="">
 			<ol>
-				<li> To find the min and max value of a dimension, we used d3.extent() which finds the min and max value of a dimension and stores it as an array where the first slot is the minmum value and the second slot is the maximum. To print this, we refereced the name of the array and the array position.</li>
+				<li> To find the min and max value of a dimension, we used d3.extent() which finds the min and max value of a dimension and stores it as an array where the first slot is the minimum value and the second slot is the maximum. To print this, we refereced the name of the array and the array position.</li>
 			</br>
 				<li> To find the overall sum of a dimension, we used d3.sum() which totals all the numeric values found in the dimension. This output a numeric float value which is printed in the console. </li>
 			</br>
-				<li></li>
+				<li> To find the average value of a dimension, we used d3.mean() to total all the values in the dimension and then divide by the number of values. This outputs the average value. Some values had to be filtered through using a data.filter() first to get the correct average value, while others did not. </li>
 			</br>
-				<li></li>
+				<li> To count the total number of occurences in a dimension based on a specified criteria, we used the data.foreach() function to check each value of the dimension, and then .startsWith() to check if the dimension name or value starts with the specified criteria. If the value started with the criteria, a variable used for counting was incremented by one. The counting variable was then printed to the console once all the items for the dimension were iterated through.</li>
 			</ol>
 		</div>
 
