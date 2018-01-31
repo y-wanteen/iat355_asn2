@@ -13,7 +13,7 @@ d3.csv(url,function(data){
   var minCS= d3.extent(data,function(d){  return +d['Critic_Score'];})
   var minUS= d3.extent(data,function(d){  return +d['User_Score'];})
   var minCC= d3.extent(data,function(d){  return +d['Critic_Count'];})
-
+      //print in console
   console.log("1)Finding Min and Max of 7  Video Games Dimensions: "+
   "\n\nMin NA sale is " +minNA[0]+"         Max NA sale is "+minNA[1]+
   "\nMin EU Sales= " +minEU[0] +"           Max EU Sales= " +minEU[1]+
@@ -35,6 +35,7 @@ d3.csv(url,function(data){
  var sumUS= d3.sum(data,function(d){return +d['User_Score'];})
  var sumCS= d3.sum(data,function(d){return +d['Critic_Score'];})
 
+    //print in the console
  console.log("2) Total Sum of 7 Video Games Dimensions: "+
 "\n\nTotal NA sale= " +sumNA+ "\nTotal EU sale= " +sumEU+
 "\nTotal JP sale= " +sumJP+"\nTotal user count= " +sumUC+"\nTotal critic count " +sumCC+
