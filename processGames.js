@@ -2,7 +2,12 @@
 var url = "http://www.sfu.ca/~wanteeny/iat355/asn2/data/Video_Games_Sales_as_at_22_Dec_2016.csv";
 
 
+
 d3.csv(url,function(data){
+
+  // prints a divider between two data sheets in console
+  console.log("    \n\n");
+
 
   //#1: Calculating min and max
   // referenced http://learnjsdata.com/summarize_data.html
